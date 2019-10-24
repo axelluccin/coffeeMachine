@@ -8,6 +8,6 @@ public class UserCommand {
     }
 
     public String getDrink() {
-        return "";
+        return "T";
     }
 }

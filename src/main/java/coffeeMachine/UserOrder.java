@@ -18,6 +18,9 @@ public class UserOrder {
     }
 
     public String getStick() {
-        return "0";
+        if (sugar > 0) {
+            return "0";
+        }
+        return "";
     }
 }

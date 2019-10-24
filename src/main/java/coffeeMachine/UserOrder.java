@@ -16,4 +16,8 @@ public class UserOrder {
     public String getSugar() {
         return String.valueOf(sugar);
     }
+
+    public String getStick() {
+        return "0";
+    }
 }

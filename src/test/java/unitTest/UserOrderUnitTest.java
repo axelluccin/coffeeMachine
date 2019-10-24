@@ -33,4 +33,13 @@ public class UserOrderUnitTest {
 
         assertThat(resultSugar).isEqualTo("1");
     }
+
+    @Test
+    public void when_user_order_1_sugar_should_return_0_stick() {
+        UserOrder userOrder = new UserOrder(DrinkType.TEA, 1);
+
+        String resultStick = userOrder.getStick();
+
+        assertThat(resultStick).isEqualTo("0");
+    }
 }

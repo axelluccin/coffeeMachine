@@ -1,7 +1,7 @@
 package coffeeMachine;
 
 public class CoffeeMachine {
-    public String command(UserCommand userCommand) {
+    public String command(UserOrder userOrder) {
         return "";
     }
 }

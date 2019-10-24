@@ -1,10 +1,12 @@
 package coffeeMachine;
 
-public class UserCommand {
+public class UserOrder {
     private final DrinkType drink;
+    private final int sugar;
 
-    public UserCommand(DrinkType drink, int sugar) {
+    public UserOrder(DrinkType drink, int sugar) {
         this.drink = drink;
+        this.sugar = sugar;
     }
 
     public String getDrink() {
@@ -12,6 +14,6 @@ public class UserCommand {
     }
 
     public String getSugar() {
-        return "0";
+        return String.valueOf(sugar);
     }
 }

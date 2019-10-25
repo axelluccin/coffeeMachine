@@ -27,4 +27,14 @@ public class CoffeeMachineAcceptanceTest {
 
         assertThat(resultOrder).isEqualTo("H::");
     }
+
+    @Test
+    public void when_customer_order_a_coffee_with_2_sugar_then_the_coffee_machine_send_good_protocol() {
+        UserOrder userOrder = new UserOrder(DrinkType.COFFEE, 2);
+        CoffeeMachine coffeeMachine = new CoffeeMachine();
+
+        String resultOrder = coffeeMachine.order(userOrder);
+
+        assertThat(resultOrder).isEqualTo("C:2:0");
+    }
 }

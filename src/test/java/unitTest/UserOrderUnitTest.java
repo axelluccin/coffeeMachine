@@ -60,4 +60,13 @@ public class UserOrderUnitTest {
 
         assertThat(resultDrink).isEqualTo("H");
     }
+
+    @Test
+    public void when_user_order_a_coffee_should_return_C() {
+        UserOrder userOrder = new UserOrder(DrinkType.COFFEE, 0);
+
+        String resultDrink = userOrder.getDrink();
+
+        assertThat(resultDrink).isEqualTo("C");
+    }
 }

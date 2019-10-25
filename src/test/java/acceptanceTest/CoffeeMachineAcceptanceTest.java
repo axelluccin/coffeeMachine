@@ -15,6 +15,7 @@ public class CoffeeMachineAcceptanceTest {
     @Before
     public void setUp() throws Exception {
         drinkMaker = mock(DrinkMaker.class);
+        protocolDrinkMaker = new ProtocolDrinkMaker();
     }
 
     @Test

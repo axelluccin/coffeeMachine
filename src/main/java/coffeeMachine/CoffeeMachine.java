@@ -13,10 +13,10 @@ public class CoffeeMachine {
     }
 
     public void order(UserOrder userOrder) {
-        drinkMaker.send(userOrder.getDrink() + SEPARATION + userOrder.getSugar() + SEPARATION + userOrder.getStick());
+        drinkMaker.send(protocolDrinkMaker.format(userOrder));
     }
 
     public void displayMessage(String message) {
-        drinkMaker.send(MESSAGE + message);
+        drinkMaker.send(protocolDrinkMaker.format(message));
     }
 }

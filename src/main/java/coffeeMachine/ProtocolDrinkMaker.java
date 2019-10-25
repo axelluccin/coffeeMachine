@@ -1,11 +1,15 @@
 package coffeeMachine;
 
 public class ProtocolDrinkMaker {
+
+    private static final String SEPARATION = ":";
+    private static final String MESSAGE = "M:";
+
     public String format(UserOrder userOrder) {
-        return userOrder.getDrink() + ":" + userOrder.getSugar() + ":" + userOrder.getStick();
+        return userOrder.getDrink() + SEPARATION + userOrder.getSugar() + SEPARATION + userOrder.getStick();
     }
 
     public String format(String message) {
-        return "M:" + message;
+        return MESSAGE + message;
     }
 }

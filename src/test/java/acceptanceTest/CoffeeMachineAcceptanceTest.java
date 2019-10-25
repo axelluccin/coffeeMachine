@@ -1,9 +1,6 @@
 package acceptanceTest;
 
-import coffeeMachine.CoffeeMachine;
-import coffeeMachine.DrinkMaker;
-import coffeeMachine.DrinkType;
-import coffeeMachine.UserOrder;
+import coffeeMachine.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,6 +10,7 @@ import static org.mockito.Mockito.verify;
 public class CoffeeMachineAcceptanceTest {
 
     private DrinkMaker drinkMaker;
+    private ProtocolDrinkMaker protocolDrinkMaker;
 
     @Before
     public void setUp() throws Exception {

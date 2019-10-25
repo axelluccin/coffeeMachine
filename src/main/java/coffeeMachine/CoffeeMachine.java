@@ -5,9 +5,11 @@ public class CoffeeMachine {
     private static final String SEPARATION = ":";
     private static final String MESSAGE = "M:";
     private final DrinkMaker drinkMaker;
+    private final ProtocolDrinkMaker protocolDrinkMaker;
 
-    public CoffeeMachine(DrinkMaker drinkMaker) {
+    public CoffeeMachine(DrinkMaker drinkMaker, ProtocolDrinkMaker protocolDrinkMaker) {
         this.drinkMaker = drinkMaker;
+        this.protocolDrinkMaker = protocolDrinkMaker;
     }
 
     public void order(UserOrder userOrder) {

@@ -11,17 +11,18 @@ public class CoffeeMachineAcceptanceTest {
 
     private DrinkMaker drinkMaker;
     private ProtocolDrinkMaker protocolDrinkMaker;
+    private CoffeeMachine coffeeMachine;
 
     @Before
     public void setUp() throws Exception {
         drinkMaker = mock(DrinkMaker.class);
         protocolDrinkMaker = new ProtocolDrinkMaker();
+        coffeeMachine = new CoffeeMachine(drinkMaker, protocolDrinkMaker);
     }
 
     @Test
     public void when_customer_order_a_tea_with_sugar_then_coffee_machine_return_the_good_protocol() {
         UserOrder userOrder = new UserOrder(DrinkType.TEA, 1);
-        CoffeeMachine coffeeMachine = new CoffeeMachine(drinkMaker, protocolDrinkMaker);
 
         coffeeMachine.order(userOrder);
 
@@ -31,7 +32,6 @@ public class CoffeeMachineAcceptanceTest {
     @Test
     public void when_customer_order_a_chocolate_with_no_sugar_then_the_coffee_machine_send_good_protocol() {
         UserOrder userOrder = new UserOrder(DrinkType.CHOCOLATE, 0);
-        CoffeeMachine coffeeMachine = new CoffeeMachine(drinkMaker, protocolDrinkMaker);
 
         coffeeMachine.order(userOrder);
 
@@ -41,7 +41,6 @@ public class CoffeeMachineAcceptanceTest {
     @Test
     public void when_customer_order_a_coffee_with_2_sugar_then_the_coffee_machine_send_good_protocol() {
         UserOrder userOrder = new UserOrder(DrinkType.COFFEE, 2);
-        CoffeeMachine coffeeMachine = new CoffeeMachine(drinkMaker, protocolDrinkMaker);
 
         coffeeMachine.order(userOrder);
 
@@ -50,8 +49,6 @@ public class CoffeeMachineAcceptanceTest {
 
     @Test
     public void display_a_message_then_coffee_machine_send_good_protocol() {
-        CoffeeMachine coffeeMachine = new CoffeeMachine(drinkMaker, protocolDrinkMaker);
-
         coffeeMachine.displayMessage("un message");
 
         verify(drinkMaker).send("M:un message");

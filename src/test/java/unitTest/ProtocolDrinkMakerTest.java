@@ -28,7 +28,9 @@ public class ProtocolDrinkMakerTest {
 
     @Test
     public void when_display_message_to_user_then_protocol_drink_maker_should_return_the_string_protocol() {
-        String resultProtocol = protocolDrinkMaker.format("le message");
+        String message = "le message";
+
+        String resultProtocol = protocolDrinkMaker.format(message);
 
         assertThat(resultProtocol).isEqualTo("M:le message");
     }

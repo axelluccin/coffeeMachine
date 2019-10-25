@@ -17,12 +17,12 @@ public class UserOrderUnitTest {
     }
 
     @Test
-    public void when_user_order_0_sugar_should_return_0() {
+    public void when_user_order_0_sugar_should_return_empty_string() {
         UserOrder userOrder = new UserOrder(DrinkType.TEA, 0);
 
         String resultSugar = userOrder.getSugar();
 
-        assertThat(resultSugar).isEqualTo("0");
+        assertThat(resultSugar).isEqualTo("");
     }
 
     @Test
@@ -50,5 +50,14 @@ public class UserOrderUnitTest {
         String resultStick = userOrder.getStick();
 
         assertThat(resultStick).isEqualTo("");
+    }
+
+    @Test
+    public void when_user_order_a_chocolate_should_return_H() {
+        UserOrder userOrder = new UserOrder(DrinkType.CHOCOLATE, 0);
+
+        String resultDrink = userOrder.getDrink();
+
+        assertThat(resultDrink).isEqualTo("H");
     }
 }

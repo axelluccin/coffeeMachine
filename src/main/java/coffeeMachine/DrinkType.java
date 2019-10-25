@@ -1,7 +1,11 @@
 package coffeeMachine;
 
 public enum DrinkType {
-    TEA("T");
+    TEA("T"), CHOCOLATE("H");
+
+    public String getDrink() {
+        return drink;
+    }
 
     private final String drink;
 

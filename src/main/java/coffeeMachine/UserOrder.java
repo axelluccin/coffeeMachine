@@ -10,11 +10,14 @@ public class UserOrder {
     }
 
     public String getDrink() {
-        return "T";
+        return drink.getDrink();
     }
 
     public String getSugar() {
-        return String.valueOf(sugar);
+        if (sugar > 0) {
+            return String.valueOf(sugar);
+        }
+        return "";
     }
 
     public String getStick() {

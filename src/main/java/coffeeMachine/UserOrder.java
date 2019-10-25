@@ -3,12 +3,10 @@ package coffeeMachine;
 public class UserOrder {
     private final DrinkType drink;
     private final int sugar;
-    private final String message;
 
-    public UserOrder(DrinkType drink, int sugar, String message) {
+    public UserOrder(DrinkType drink, int sugar) {
         this.drink = drink;
         this.sugar = sugar;
-        this.message = message;
     }
 
     public String getDrink() {
@@ -27,10 +25,5 @@ public class UserOrder {
             return "0";
         }
         return "";
-    }
-
-
-    public String getMessage() {
-        return message;
     }
 }

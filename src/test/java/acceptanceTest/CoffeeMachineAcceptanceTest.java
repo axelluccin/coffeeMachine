@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CoffeeMachineAcceptanceTest {
     @Test
     public void when_customer_order_a_tea_with_sugar_then_coffee_machine_return_the_good_protocol() {
-        UserOrder userOrder = new UserOrder(DrinkType.TEA, 1);
+        UserOrder userOrder = new UserOrder(DrinkType.TEA, 1, false);
         CoffeeMachine coffeeMachine = new CoffeeMachine();
 
         String resultCommand = coffeeMachine.order(userOrder);
@@ -20,7 +20,7 @@ public class CoffeeMachineAcceptanceTest {
 
     @Test
     public void when_customer_order_a_chocolate_with_no_sugar_then_the_coffee_machine_send_good_protocol() {
-        UserOrder userOrder = new UserOrder(DrinkType.CHOCOLATE, 0);
+        UserOrder userOrder = new UserOrder(DrinkType.CHOCOLATE, 0, false);
         CoffeeMachine coffeeMachine = new CoffeeMachine();
 
         String resultOrder = coffeeMachine.order(userOrder);
@@ -30,11 +30,21 @@ public class CoffeeMachineAcceptanceTest {
 
     @Test
     public void when_customer_order_a_coffee_with_2_sugar_then_the_coffee_machine_send_good_protocol() {
-        UserOrder userOrder = new UserOrder(DrinkType.COFFEE, 2);
+        UserOrder userOrder = new UserOrder(DrinkType.COFFEE, 2, false);
         CoffeeMachine coffeeMachine = new CoffeeMachine();
 
         String resultOrder = coffeeMachine.order(userOrder);
 
         assertThat(resultOrder).isEqualTo("C:2:0");
+    }
+
+    @Test
+    public void when_user_order_a_message_then_coffee_machine_send_good_protocol() {
+        UserOrder userOrder = new UserOrder(null, 0, true);
+        CoffeeMachine coffeeMachine = new CoffeeMachine();
+
+        String resultOrder = coffeeMachine.order(userOrder);
+
+        assertThat(resultOrder).isEqualTo("M:message-content");
     }
 }

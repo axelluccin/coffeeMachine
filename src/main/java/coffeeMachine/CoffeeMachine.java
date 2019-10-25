@@ -1,7 +1,14 @@
 package coffeeMachine;
 
 public class CoffeeMachine {
+
+    private static final String MESSAGE_CONTENT = "M:message-content";
+    private static final String SEPARATION = ":";
+
     public String order(UserOrder userOrder) {
-        return userOrder.getDrink() + ":" + userOrder.getSugar() + ":" + userOrder.getStick();
+        if (userOrder.isMessage()) {
+            return MESSAGE_CONTENT;
+        }
+        return userOrder.getDrink() + SEPARATION + userOrder.getSugar() + SEPARATION + userOrder.getStick();
     }
 }

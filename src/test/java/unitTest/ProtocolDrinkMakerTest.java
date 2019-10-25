@@ -3,9 +3,10 @@ package unitTest;
 import coffeeMachine.DrinkType;
 import coffeeMachine.ProtocolDrinkMaker;
 import coffeeMachine.UserOrder;
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProtocolDrinkMakerTest {
 
@@ -22,13 +23,13 @@ public class ProtocolDrinkMakerTest {
 
         String resultProtocol = protocolDrinkMaker.format(userOrder);
 
-        Assertions.assertThat(resultProtocol).isEqualTo("T:1:0");
+        assertThat(resultProtocol).isEqualTo("T:1:0");
     }
 
     @Test
     public void when_display_message_to_user_then_protocol_drink_maker_should_return_the_string_protocol() {
         String resultProtocol = protocolDrinkMaker.format("le message");
 
-        Assertions.assertThat(resultProtocol).isEqualTo("M:le message");
+        assertThat(resultProtocol).isEqualTo("M:le message");
     }
 }

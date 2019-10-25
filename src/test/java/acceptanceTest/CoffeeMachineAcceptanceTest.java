@@ -10,10 +10,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CoffeeMachineAcceptanceTest {
     @Test
     public void when_customer_order_a_tea_with_sugar_then_coffee_machine_return_the_good_protocol() {
-        UserOrder userOrder = new UserOrder(DrinkType.TEA, 0);
+        UserOrder userOrder = new UserOrder(DrinkType.TEA, 1);
         CoffeeMachine coffeeMachine = new CoffeeMachine();
 
-        String resultCommand = coffeeMachine.command(userOrder);
+        String resultCommand = coffeeMachine.order(userOrder);
 
         assertThat(resultCommand).isEqualTo("T:1:0");
     }

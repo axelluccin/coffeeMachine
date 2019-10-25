@@ -1,7 +1,7 @@
 package coffeeMachine;
 
 public class CoffeeMachine {
-    public String command(UserOrder userOrder) {
-        return "";
+    public String order(UserOrder userOrder) {
+        return userOrder.getDrink() + ":" + userOrder.getSugar() + ":" + userOrder.getStick();
     }
 }

@@ -3,9 +3,9 @@ package coffeeMachine;
 public class UserOrder {
     private final DrinkType drink;
     private final int sugar;
-    private final boolean message;
+    private final String message;
 
-    public UserOrder(DrinkType drink, int sugar, boolean message) {
+    public UserOrder(DrinkType drink, int sugar, String message) {
         this.drink = drink;
         this.sugar = sugar;
         this.message = message;
@@ -30,7 +30,7 @@ public class UserOrder {
     }
 
 
-    public boolean isMessage() {
+    public String getMessage() {
         return message;
     }
 }

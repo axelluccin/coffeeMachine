@@ -6,8 +6,8 @@ public class CoffeeMachine {
     private static final String SEPARATION = ":";
 
     public String order(UserOrder userOrder) {
-        if (userOrder.isMessage()) {
-            return MESSAGE_CONTENT;
+        if (!userOrder.getMessage().isEmpty()) {
+            return "M:" + userOrder.getMessage();
         }
         return userOrder.getDrink() + SEPARATION + userOrder.getSugar() + SEPARATION + userOrder.getStick();
     }

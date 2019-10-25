@@ -4,12 +4,17 @@ public class CoffeeMachine {
 
     private static final String SEPARATION = ":";
     private static final String MESSAGE = "M:";
+    private final DrinkMaker drinkMaker;
 
-    public String order(UserOrder userOrder) {
-        return userOrder.getDrink() + SEPARATION + userOrder.getSugar() + SEPARATION + userOrder.getStick();
+    public CoffeeMachine(DrinkMaker drinkMaker) {
+        this.drinkMaker = drinkMaker;
     }
 
-    public String displayMessage(String message) {
-        return MESSAGE + message;
+    public void order(UserOrder userOrder) {
+        drinkMaker.send(userOrder.getDrink() + SEPARATION + userOrder.getSugar() + SEPARATION + userOrder.getStick());
+    }
+
+    public void displayMessage(String message) {
+        drinkMaker.send(MESSAGE + message);
     }
 }

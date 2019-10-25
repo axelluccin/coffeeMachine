@@ -17,7 +17,7 @@ public class ProtocolDrinkMakerTest {
     }
 
     @Test
-    public void when_user_order_a_tea_with_a_sugar_should_return_the_string_protocol() {
+    public void when_user_order_a_tea_with_a_sugar_protocol_drink_maker_should_return_the_string_protocol() {
         UserOrder userOrder = new UserOrder(DrinkType.TEA, 1);
 
         String resultProtocol = protocolDrinkMaker.format(userOrder);
@@ -25,5 +25,10 @@ public class ProtocolDrinkMakerTest {
         Assertions.assertThat(resultProtocol).isEqualTo("T:1:0");
     }
 
+    @Test
+    public void when_display_message_to_user_then_protocol_drink_maker_should_return_the_string_protocol() {
+        String resultProtocol = protocolDrinkMaker.format("le message");
 
+        Assertions.assertThat(resultProtocol).isEqualTo("M:le message");
+    }
 }

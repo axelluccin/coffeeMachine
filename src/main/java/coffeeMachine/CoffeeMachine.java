@@ -1,5 +1,7 @@
 package coffeeMachine;
 
+import java.math.BigDecimal;
+
 public class CoffeeMachine {
 
     private static final String SEPARATION = ":";
@@ -13,7 +15,12 @@ public class CoffeeMachine {
     }
 
     public void order(UserOrder userOrder) {
-        drinkMaker.send(protocolDrinkMaker.format(userOrder));
+        BigDecimal priceCompare = userOrder.priceCompare();
+        if (priceCompare.compareTo(BigDecimal.valueOf(0.0)) <= 0) {
+            drinkMaker.send(protocolDrinkMaker.format(userOrder));
+        } else {
+            this.displayMessage("It is missing " + priceCompare + " dollars to buy a tea");
+        }
     }
 
     public void displayMessage(String message) {

@@ -57,11 +57,19 @@ public class CoffeeMachineAcceptanceTest {
     }
 
     @Test
-    public void when_user_oder_a_tea_and_give_30_cents_then_the_drink_maker_should_return_the_message_protocol() {
+    public void when_user_order_a_tea_and_give_30_cents_then_the_coffee_machine_should_send_the_message_protocol_to_the_drink_maker() {
         UserOrder userOrder = new UserOrder(DrinkType.TEA, 0, BigDecimal.valueOf(0.3));
 
         coffeeMachine.order(userOrder);
 
         verify(drinkMaker).send("M:It is missing 0.1 dollars to buy a tea");
+    }
+
+    @Test
+    public void when_user_order_a_orange_juice_and_give_60_cents_then_coffee_machine_should_send_the_message_protocol_to_the_drink_maker() {
+        UserOrder userOrder = new UserOrder(DrinkType.ORANGE, 0, BigDecimal.valueOf(0.60));
+        coffeeMachine.order(userOrder);
+
+        verify(drinkMaker).send("0::");
     }
 }

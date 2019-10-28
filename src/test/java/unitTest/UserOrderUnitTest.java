@@ -108,4 +108,13 @@ public class UserOrderUnitTest {
 
         assertThat(resultPriceCompare).isEqualTo(BigDecimal.valueOf(0.0));
     }
+
+    @Test
+    public void when_user_order_a_orange_then_the_drink_protocol_should_return_C() {
+        UserOrder userOrder = new UserOrder(DrinkType.ORANGE, 0, BigDecimal.ZERO);
+
+        String resultDrink = userOrder.getDrinkProtocol();
+
+        assertThat(resultDrink).isEqualTo("O");
+    }
 }

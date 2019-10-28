@@ -5,7 +5,8 @@ import java.math.BigDecimal;
 public enum DrinkType {
     TEA("T", BigDecimal.valueOf(0.40), "tea"),
     CHOCOLATE("H", BigDecimal.valueOf(0.50), "chocolate"),
-    COFFEE("C", BigDecimal.valueOf(0.60), "coffee");
+    COFFEE("C", BigDecimal.valueOf(0.60), "coffee"),
+    ORANGE("O", BigDecimal.ZERO, "");
 
     private final String drinkProtocol;
     private final BigDecimal cost;

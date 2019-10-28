@@ -32,6 +32,6 @@ public class UserOrder {
     }
 
     public BigDecimal priceCompare() {
-        return BigDecimal.valueOf(0.40).subtract(money);
+        return drink.getCost().subtract(money);
     }
 }

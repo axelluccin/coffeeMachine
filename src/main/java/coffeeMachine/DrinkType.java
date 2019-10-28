@@ -1,15 +1,25 @@
 package coffeeMachine;
 
+import java.math.BigDecimal;
+
 public enum DrinkType {
-    TEA("T"), CHOCOLATE("H"), COFFEE("C");
+    TEA("T", BigDecimal.valueOf(0.40)),
+    CHOCOLATE("H", BigDecimal.valueOf(0.0)),
+    COFFEE("C", BigDecimal.valueOf(0.0));
 
     private final String drink;
+    private final BigDecimal cost;
 
     public String getDrink() {
         return drink;
     }
 
-    DrinkType(String drink) {
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    DrinkType(String drink, BigDecimal cost) {
         this.drink = drink;
+        this.cost = cost;
     }
 }

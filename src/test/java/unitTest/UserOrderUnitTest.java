@@ -80,4 +80,14 @@ public class UserOrderUnitTest {
 
         assertThat(resultPriceCompare).isEqualTo(BigDecimal.valueOf(0.10));
     }
+
+
+    @Test
+    public void when_user_order_a_tea_with_40_cents_then_price_compare_should_return_0() {
+        UserOrder userOrder = new UserOrder(DrinkType.TEA, 0, BigDecimal.valueOf(0.40));
+
+        BigDecimal resultPriceCompare = userOrder.priceCompare();
+
+        assertThat(resultPriceCompare).isEqualTo(BigDecimal.valueOf(0.0));
+    }
 }

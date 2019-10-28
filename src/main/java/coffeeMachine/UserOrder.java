@@ -5,10 +5,12 @@ import java.math.BigDecimal;
 public class UserOrder {
     private final DrinkType drink;
     private final int sugar;
+    private final BigDecimal money;
 
     public UserOrder(DrinkType drink, int sugar, BigDecimal money) {
         this.drink = drink;
         this.sugar = sugar;
+        this.money = money;
     }
 
     public String getDrink() {
@@ -30,6 +32,6 @@ public class UserOrder {
     }
 
     public BigDecimal priceCompare() {
-        return BigDecimal.valueOf(0.10);
+        return BigDecimal.valueOf(0.40).subtract(money);
     }
 }

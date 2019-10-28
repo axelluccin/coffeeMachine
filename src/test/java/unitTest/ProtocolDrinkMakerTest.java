@@ -57,4 +57,11 @@ public class ProtocolDrinkMakerTest {
 
         assertThat(resultProtocolDrinkMaker).isEqualTo("M:It is missing 0.3 dollars to buy a coffee");
     }
+
+    @Test
+    public void when_display_that_it_is_missing_money_to_buy_a_orange_to_user_then_protocol_drink_maker_should_format_the_message() {
+        String resultProtocolDrinkMaker = protocolDrinkMaker.format(BigDecimal.valueOf(0.30), DrinkType.ORANGE);
+
+        assertThat(resultProtocolDrinkMaker).isEqualTo("M:It is missing 0.3 dollars to buy a orange");
+    }
 }

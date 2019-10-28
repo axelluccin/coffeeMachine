@@ -68,8 +68,9 @@ public class CoffeeMachineAcceptanceTest {
     @Test
     public void when_user_order_a_orange_juice_and_give_60_cents_then_coffee_machine_should_send_the_message_protocol_to_the_drink_maker() {
         UserOrder userOrder = new UserOrder(DrinkType.ORANGE, 0, BigDecimal.valueOf(0.60));
+
         coffeeMachine.order(userOrder);
 
-        verify(drinkMaker).send("0::");
+        verify(drinkMaker).send("O::");
     }
 }

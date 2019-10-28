@@ -6,7 +6,7 @@ public enum DrinkType {
     TEA("T", BigDecimal.valueOf(0.40), "tea"),
     CHOCOLATE("H", BigDecimal.valueOf(0.50), "chocolate"),
     COFFEE("C", BigDecimal.valueOf(0.60), "coffee"),
-    ORANGE("O", BigDecimal.valueOf(0.60), "");
+    ORANGE("O", BigDecimal.valueOf(0.60), "orange");
 
     private final String drinkProtocol;
     private final BigDecimal cost;

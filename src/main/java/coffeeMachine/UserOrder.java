@@ -14,7 +14,7 @@ public class UserOrder {
     }
 
     public String getDrink() {
-        return drink.getDrink();
+        return drink.getDrinkProtocol();
     }
 
     public String getSugar() {

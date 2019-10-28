@@ -24,7 +24,7 @@ public class CoffeeMachineAcceptanceTest {
 
     @Test
     public void when_customer_order_a_tea_with_sugar_then_coffee_machine_return_the_good_protocol() {
-        UserOrder userOrder = new UserOrder(DrinkType.TEA, 1, BigDecimal.valueOf(0.40));
+        UserOrder userOrder = new UserOrder(DrinkType.TEA, 1, BigDecimal.valueOf(0.40), false);
 
         coffeeMachine.order(userOrder);
 
@@ -33,7 +33,7 @@ public class CoffeeMachineAcceptanceTest {
 
     @Test
     public void when_customer_order_a_chocolate_with_no_sugar_then_the_coffee_machine_send_good_protocol() {
-        UserOrder userOrder = new UserOrder(DrinkType.CHOCOLATE, 0, BigDecimal.valueOf(0.50));
+        UserOrder userOrder = new UserOrder(DrinkType.CHOCOLATE, 0, BigDecimal.valueOf(0.50), false);
 
         coffeeMachine.order(userOrder);
 
@@ -42,7 +42,7 @@ public class CoffeeMachineAcceptanceTest {
 
     @Test
     public void when_customer_order_a_coffee_with_2_sugar_then_the_coffee_machine_send_good_protocol() {
-        UserOrder userOrder = new UserOrder(DrinkType.COFFEE, 2, BigDecimal.valueOf(0.60));
+        UserOrder userOrder = new UserOrder(DrinkType.COFFEE, 2, BigDecimal.valueOf(0.60), false);
 
         coffeeMachine.order(userOrder);
 
@@ -58,7 +58,7 @@ public class CoffeeMachineAcceptanceTest {
 
     @Test
     public void when_user_order_a_tea_and_give_30_cents_then_the_coffee_machine_should_send_the_message_protocol_to_the_drink_maker() {
-        UserOrder userOrder = new UserOrder(DrinkType.TEA, 0, BigDecimal.valueOf(0.3));
+        UserOrder userOrder = new UserOrder(DrinkType.TEA, 0, BigDecimal.valueOf(0.3), false);
 
         coffeeMachine.order(userOrder);
 
@@ -67,10 +67,19 @@ public class CoffeeMachineAcceptanceTest {
 
     @Test
     public void when_user_order_a_orange_juice_and_give_60_cents_then_coffee_machine_should_send_the_message_protocol_to_the_drink_maker() {
-        UserOrder userOrder = new UserOrder(DrinkType.ORANGE, 0, BigDecimal.valueOf(0.60));
+        UserOrder userOrder = new UserOrder(DrinkType.ORANGE, 0, BigDecimal.valueOf(0.60), false);
 
         coffeeMachine.order(userOrder);
 
         verify(drinkMaker).send("O::");
+    }
+
+    @Test
+    public void when_user_order_a_coffee_extra_hot_then_coffee_machine_should_send_the_message_protocol_to_the_drink_maker() {
+        UserOrder userOrder = new UserOrder(DrinkType.COFFEE, 0, BigDecimal.valueOf(0.60), true);
+
+        coffeeMachine.order(userOrder);
+
+        verify(drinkMaker).send("Ch::");
     }
 }

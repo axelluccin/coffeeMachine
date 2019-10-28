@@ -6,11 +6,13 @@ public class UserOrder {
     private final DrinkType drink;
     private final int sugar;
     private final BigDecimal money;
+    private final boolean isHot;
 
-    public UserOrder(DrinkType drink, int sugar, BigDecimal money) {
+    public UserOrder(DrinkType drink, int sugar, BigDecimal money, boolean isHot) {
         this.drink = drink;
         this.sugar = sugar;
         this.money = money;
+        this.isHot = isHot;
     }
 
     public String getDrinkProtocol() {
@@ -37,5 +39,11 @@ public class UserOrder {
 
     public DrinkType getDrink() {
         return drink;
+    }
+
+    public String drinkHot() {
+        if (isHot)
+            return "h";
+        return "";
     }
 }

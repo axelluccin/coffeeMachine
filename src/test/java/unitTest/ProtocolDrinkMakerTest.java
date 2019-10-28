@@ -21,7 +21,7 @@ public class ProtocolDrinkMakerTest {
 
     @Test
     public void when_user_order_a_tea_with_a_sugar_protocol_drink_maker_should_return_the_string_protocol() {
-        UserOrder userOrder = new UserOrder(DrinkType.TEA, 1, BigDecimal.ZERO);
+        UserOrder userOrder = new UserOrder(DrinkType.TEA, 1, BigDecimal.ZERO, false);
 
         String resultProtocol = protocolDrinkMaker.format(userOrder);
 
@@ -63,5 +63,14 @@ public class ProtocolDrinkMakerTest {
         String resultProtocolDrinkMaker = protocolDrinkMaker.format(BigDecimal.valueOf(0.30), DrinkType.ORANGE);
 
         assertThat(resultProtocolDrinkMaker).isEqualTo("M:It is missing 0.3 dollars to buy a orange");
+    }
+
+    @Test
+    public void when_user_order_a_coffee_extra_hot_then_protocol_drink_maker_should_format_the_good_protocol() {
+        UserOrder userOrder = new UserOrder(DrinkType.COFFEE, 0, BigDecimal.ZERO, true);
+
+        String resultProtocolDrinkMaker = protocolDrinkMaker.format(userOrder);
+
+        assertThat(resultProtocolDrinkMaker).isEqualTo("Ch::");
     }
 }

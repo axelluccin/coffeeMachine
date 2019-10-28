@@ -13,7 +13,7 @@ public class UserOrder {
         this.money = money;
     }
 
-    public String getDrink() {
+    public String getDrinkProtocol() {
         return drink.getDrinkProtocol();
     }
 
@@ -33,5 +33,9 @@ public class UserOrder {
 
     public BigDecimal priceCompare() {
         return drink.getCost().subtract(money);
+    }
+
+    public DrinkType getDrink() {
+        return drink;
     }
 }

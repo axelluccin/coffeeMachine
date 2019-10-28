@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 
 public class CoffeeMachine {
 
-    private static final String SEPARATION = ":";
-    private static final String MESSAGE = "M:";
     private final DrinkMaker drinkMaker;
     private final ProtocolDrinkMaker protocolDrinkMaker;
 
@@ -16,11 +14,15 @@ public class CoffeeMachine {
 
     public void order(UserOrder userOrder) {
         BigDecimal priceCompare = userOrder.priceCompare();
-        if (priceCompare.compareTo(BigDecimal.valueOf(0.0)) <= 0) {
+        if (moneyIsGreater(priceCompare)) {
             drinkMaker.send(protocolDrinkMaker.format(userOrder));
         } else {
-            this.displayMessage("It is missing " + priceCompare + " dollars to buy a tea");
+            drinkMaker.send(protocolDrinkMaker.format(priceCompare, userOrder.getDrink()));
         }
+    }
+
+    private boolean moneyIsGreater(BigDecimal priceCompare) {
+        return BigDecimal.valueOf(0.0).compareTo(priceCompare) >= 0;
     }
 
     public void displayMessage(String message) {

@@ -10,7 +10,7 @@ public class ProtocolDrinkMaker {
     private static final String DOLLARS_TO_BUY_A = " dollars to buy a ";
 
     public String format(UserOrder userOrder) {
-        return userOrder.getDrink() + SEPARATION + userOrder.getSugar() + SEPARATION + userOrder.getStick();
+        return userOrder.getDrinkProtocol() + SEPARATION + userOrder.getSugar() + SEPARATION + userOrder.getStick();
     }
 
     public String format(String message) {

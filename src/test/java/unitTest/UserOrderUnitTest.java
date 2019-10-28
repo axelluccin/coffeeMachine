@@ -13,7 +13,7 @@ public class UserOrderUnitTest {
     public void when_user_order_a_tea_should_return_T() {
         UserOrder userOrder = new UserOrder(DrinkType.TEA, 0, BigDecimal.ZERO);
 
-        String resultDrink = userOrder.getDrink();
+        String resultDrink = userOrder.getDrinkProtocol();
 
         assertThat(resultDrink).isEqualTo("T");
     }
@@ -58,7 +58,7 @@ public class UserOrderUnitTest {
     public void when_user_order_a_chocolate_should_return_H() {
         UserOrder userOrder = new UserOrder(DrinkType.CHOCOLATE, 0, BigDecimal.ZERO);
 
-        String resultDrink = userOrder.getDrink();
+        String resultDrink = userOrder.getDrinkProtocol();
 
         assertThat(resultDrink).isEqualTo("H");
     }
@@ -67,7 +67,7 @@ public class UserOrderUnitTest {
     public void when_user_order_a_coffee_then_the_drink_should_return_C() {
         UserOrder userOrder = new UserOrder(DrinkType.COFFEE, 0, BigDecimal.ZERO);
 
-        String resultDrink = userOrder.getDrink();
+        String resultDrink = userOrder.getDrinkProtocol();
 
         assertThat(resultDrink).isEqualTo("C");
     }

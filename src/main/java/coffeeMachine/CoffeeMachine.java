@@ -28,4 +28,8 @@ public class CoffeeMachine {
     public void displayMessage(String message) {
         drinkMaker.send(protocolDrinkMaker.format(message));
     }
+
+    public String report() {
+        return "";
+    }
 }

@@ -1,6 +1,7 @@
 package acceptanceTest;
 
 import coffeeMachine.*;
+import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -81,5 +82,38 @@ public class CoffeeMachineAcceptanceTest {
         coffeeMachine.order(userOrder);
 
         verify(drinkMaker).send("Ch::");
+    }
+
+
+    @Test
+    public void when_users_make_some_orders_then_coffee_machine_should_return_the_report_of_orders() {
+        UserOrder userOrderTea = new UserOrder(DrinkType.COFFEE, 0, BigDecimal.valueOf(0.40), false);
+        UserOrder userOrderChocolate = new UserOrder(DrinkType.CHOCOLATE, 0, BigDecimal.valueOf(0.50), false);
+        UserOrder userOrderCoffee = new UserOrder(DrinkType.COFFEE, 0, BigDecimal.valueOf(0.60), false);
+        UserOrder userOrderOrange = new UserOrder(DrinkType.ORANGE, 0, BigDecimal.valueOf(0.60), false);
+
+        allCommand(userOrderTea, userOrderChocolate, userOrderCoffee, userOrderOrange);
+
+        String resultReport = coffeeMachine.report();
+        Assertions.assertThat(resultReport).isEqualTo("2 tea, 3 chocolate, 1 coffee and 7 orange. Money earned: 7.1 dollars");
+    }
+
+    private void allCommand(UserOrder userOrderTea, UserOrder userOrderChocolate, UserOrder userOrderCoffee, UserOrder userOrderOrange) {
+        coffeeMachine.order(userOrderTea);
+        coffeeMachine.order(userOrderTea);
+
+        coffeeMachine.order(userOrderChocolate);
+        coffeeMachine.order(userOrderChocolate);
+        coffeeMachine.order(userOrderChocolate);
+
+        coffeeMachine.order(userOrderCoffee);
+
+        coffeeMachine.order(userOrderOrange);
+        coffeeMachine.order(userOrderOrange);
+        coffeeMachine.order(userOrderOrange);
+        coffeeMachine.order(userOrderOrange);
+        coffeeMachine.order(userOrderOrange);
+        coffeeMachine.order(userOrderOrange);
+        coffeeMachine.order(userOrderOrange);
     }
 }

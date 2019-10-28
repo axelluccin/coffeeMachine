@@ -6,6 +6,8 @@ import coffeeMachine.UserOrder;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProtocolDrinkMakerTest {
@@ -19,7 +21,7 @@ public class ProtocolDrinkMakerTest {
 
     @Test
     public void when_user_order_a_tea_with_a_sugar_protocol_drink_maker_should_return_the_string_protocol() {
-        UserOrder userOrder = new UserOrder(DrinkType.TEA, 1);
+        UserOrder userOrder = new UserOrder(DrinkType.TEA, 1, BigDecimal.ZERO);
 
         String resultProtocol = protocolDrinkMaker.format(userOrder);
 

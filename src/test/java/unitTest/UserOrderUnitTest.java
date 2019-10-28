@@ -4,12 +4,14 @@ import coffeeMachine.DrinkType;
 import coffeeMachine.UserOrder;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserOrderUnitTest {
     @Test
     public void when_user_order_a_tea_should_return_T() {
-        UserOrder userOrder = new UserOrder(DrinkType.TEA, 0);
+        UserOrder userOrder = new UserOrder(DrinkType.TEA, 0, BigDecimal.ZERO);
 
         String resultDrink = userOrder.getDrink();
 
@@ -18,7 +20,7 @@ public class UserOrderUnitTest {
 
     @Test
     public void when_user_order_0_sugar_should_return_empty_string() {
-        UserOrder userOrder = new UserOrder(DrinkType.TEA, 0);
+        UserOrder userOrder = new UserOrder(DrinkType.TEA, 0, BigDecimal.ZERO);
 
         String resultSugar = userOrder.getSugar();
 
@@ -27,7 +29,7 @@ public class UserOrderUnitTest {
 
     @Test
     public void when_user_order_1_sugar_should_return_1() {
-        UserOrder userOrder = new UserOrder(DrinkType.TEA, 1);
+        UserOrder userOrder = new UserOrder(DrinkType.TEA, 1, BigDecimal.ZERO);
 
         String resultSugar = userOrder.getSugar();
 
@@ -36,7 +38,7 @@ public class UserOrderUnitTest {
 
     @Test
     public void when_user_order_1_sugar_should_return_0_stick() {
-        UserOrder userOrder = new UserOrder(DrinkType.TEA, 1);
+        UserOrder userOrder = new UserOrder(DrinkType.TEA, 1, BigDecimal.ZERO);
 
         String resultStick = userOrder.getStick();
 
@@ -45,7 +47,7 @@ public class UserOrderUnitTest {
 
     @Test
     public void when_user_order_0_sugar_should_return_no_stick() {
-        UserOrder userOrder = new UserOrder(DrinkType.TEA, 0);
+        UserOrder userOrder = new UserOrder(DrinkType.TEA, 0, BigDecimal.ZERO);
 
         String resultStick = userOrder.getStick();
 
@@ -54,7 +56,7 @@ public class UserOrderUnitTest {
 
     @Test
     public void when_user_order_a_chocolate_should_return_H() {
-        UserOrder userOrder = new UserOrder(DrinkType.CHOCOLATE, 0);
+        UserOrder userOrder = new UserOrder(DrinkType.CHOCOLATE, 0, BigDecimal.ZERO);
 
         String resultDrink = userOrder.getDrink();
 
@@ -62,11 +64,20 @@ public class UserOrderUnitTest {
     }
 
     @Test
-    public void when_user_order_a_coffee_should_return_C() {
-        UserOrder userOrder = new UserOrder(DrinkType.COFFEE, 0);
+    public void when_user_order_a_coffee_then_the_drink_should_return_C() {
+        UserOrder userOrder = new UserOrder(DrinkType.COFFEE, 0, BigDecimal.ZERO);
 
         String resultDrink = userOrder.getDrink();
 
         assertThat(resultDrink).isEqualTo("C");
+    }
+
+    @Test
+    public void when_user_order_a_tea_with_30_cents_then_price_compare_should_return_10() {
+        UserOrder userOrder = new UserOrder(DrinkType.TEA, 0, BigDecimal.valueOf(0.30));
+
+        BigDecimal resultPriceCompare = userOrder.priceCompare();
+
+        assertThat(resultPriceCompare).isEqualTo(BigDecimal.valueOf(0.10));
     }
 }

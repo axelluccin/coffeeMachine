@@ -1,10 +1,12 @@
 package coffeeMachine;
 
+import java.math.BigDecimal;
+
 public class UserOrder {
     private final DrinkType drink;
     private final int sugar;
 
-    public UserOrder(DrinkType drink, int sugar) {
+    public UserOrder(DrinkType drink, int sugar, BigDecimal money) {
         this.drink = drink;
         this.sugar = sugar;
     }
@@ -25,5 +27,9 @@ public class UserOrder {
             return "0";
         }
         return "";
+    }
+
+    public BigDecimal priceCompare() {
+        return BigDecimal.valueOf(0.10);
     }
 }

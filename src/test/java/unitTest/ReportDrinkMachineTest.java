@@ -53,6 +53,6 @@ public class ReportDrinkMachineTest {
 
         String resultReportOrders = reportDrinkMachine.reportMessage();
 
-        assertThat(resultReportOrders).isEqualTo("0 tea, 2 chocolate, 2 coffee and 0 orange. Money earned: 2.2 dollars");
+        assertThat(resultReportOrders).isEqualTo("0 tea, 2 chocolate, 2 coffee, 0 orange, money earned: 2.2 dollars");
     }
 }

@@ -98,7 +98,7 @@ public class CoffeeMachineAcceptanceTest {
 
         coffeeMachine.report();
 
-        verify(drinkMaker).printReport("2 tea, 3 chocolate, 1 coffee and 7 orange. Money earned: 7.1 dollars");
+        verify(drinkMaker).printReport("2 tea, 3 chocolate, 1 coffee, 7 orange, money earned: 7.1 dollars");
     }
 
     @Test
@@ -108,7 +108,7 @@ public class CoffeeMachineAcceptanceTest {
 
         coffeeMachine.order(userOrder);
 
-        verify(emailNotifier).notifyMissingDrink("There is no tea in coffee machine. Please, reloading the machine");
+        verify(emailNotifier).notifyMissingDrink("tea");
         verify(drinkMaker).send("M:There is no tea in coffee machine. A Email was sent to reload the coffee machine");
     }
 

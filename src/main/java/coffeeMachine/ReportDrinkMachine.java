@@ -7,9 +7,8 @@ import java.util.List;
 public class ReportDrinkMachine {
     private static final String SPACE = " ";
     private static final String VIRGULE = ", ";
-    private static final String MONEY_EARNED = ". Money earned: ";
+    private static final String MONEY_EARNED = "money earned: ";
     private static final String DOLLARS = " dollars";
-    private static final String AND = " and ";
 
     private List<DrinkType> orders = new ArrayList<>();
     private BigDecimal moneyOrders = BigDecimal.ZERO;
@@ -31,24 +30,21 @@ public class ReportDrinkMachine {
     }
 
     public String reportMessage() {
-        return new StringBuilder()
-                .append(OrdersOfType(DrinkType.TEA))
-                .append(SPACE)
-                .append(DrinkType.TEA.getDrinkName())
-                .append(VIRGULE)
-                .append(OrdersOfType(DrinkType.CHOCOLATE))
-                .append(SPACE)
-                .append(DrinkType.CHOCOLATE.getDrinkName())
-                .append(VIRGULE)
-                .append(OrdersOfType(DrinkType.COFFEE))
-                .append(SPACE)
-                .append(DrinkType.COFFEE.getDrinkName())
-                .append(AND)
-                .append(OrdersOfType(DrinkType.ORANGE))
-                .append(SPACE)
-                .append(DrinkType.ORANGE.getDrinkName())
+        return formatReportDrink(DrinkType.TEA)
+                .append(formatReportDrink(DrinkType.CHOCOLATE))
+                .append(formatReportDrink(DrinkType.COFFEE))
+                .append(formatReportDrink(DrinkType.ORANGE))
                 .append(MONEY_EARNED)
-                .append(moneyOrders).append(DOLLARS)
+                .append(moneyOrders)
+                .append(DOLLARS)
                 .toString();
+    }
+
+    private StringBuilder formatReportDrink(DrinkType drinkType) {
+        return new StringBuilder()
+                .append(OrdersOfType(drinkType))
+                .append(SPACE)
+                .append(drinkType.getDrinkName())
+                .append(VIRGULE);
     }
 }

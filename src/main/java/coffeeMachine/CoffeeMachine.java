@@ -24,11 +24,11 @@ public class CoffeeMachine {
 
     public void order(Order order) {
         UserOrderEntity userOrderEntity = new UserOrderEntity(order);
-        BigDecimal priceCompare = userOrderEntity.priceCompare();
-        if (moneyIsGreater(priceCompare)) {
+        BigDecimal drinkCost = userOrderEntity.priceCompare();
+        if (moneyPaymentIsGreaterThan(drinkCost)) {
             makeDrinkOrSendEmail(order, userOrderEntity);
         } else {
-            drinkMaker.send(protocolDrinkMaker.formatMissingMoney(priceCompare, order.getDrinkType().getDrinkName()));
+            drinkMaker.send(protocolDrinkMaker.formatMissingMoney(drinkCost, order.getDrinkType().getDrinkName()));
         }
     }
 
@@ -44,7 +44,7 @@ public class CoffeeMachine {
         }
     }
 
-    private boolean moneyIsGreater(BigDecimal priceCompare) {
+    private boolean moneyPaymentIsGreaterThan(BigDecimal priceCompare) {
         return BigDecimal.valueOf(0.0).compareTo(priceCompare) >= 0;
     }
 

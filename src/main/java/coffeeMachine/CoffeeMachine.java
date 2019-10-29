@@ -32,7 +32,7 @@ public class CoffeeMachine {
         drinkMaker.send(protocolDrinkMaker.format(message));
     }
 
-    public String report() {
-        return reportDrinkMachine.reportMessage();
+    public void report() {
+        drinkMaker.printReport(reportDrinkMachine.reportMessage());
     }
 }

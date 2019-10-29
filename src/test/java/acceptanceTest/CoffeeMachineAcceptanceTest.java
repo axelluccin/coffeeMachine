@@ -1,7 +1,6 @@
 package acceptanceTest;
 
 import coffeeMachine.*;
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -94,8 +93,8 @@ public class CoffeeMachineAcceptanceTest {
 
         allCommand(userOrderTea, userOrderChocolate, userOrderCoffee, userOrderOrange);
 
-        String resultReport = coffeeMachine.report();
-        Assertions.assertThat(resultReport).isEqualTo("2 tea, 3 chocolate, 1 coffee and 7 orange. Money earned: 7.1 dollars");
+        coffeeMachine.report();
+        verify(drinkMaker).printReport("2 tea, 3 chocolate, 1 coffee and 7 orange. Money earned: 7.1 dollars");
     }
 
     private void allCommand(UserOrder userOrderTea, UserOrder userOrderChocolate, UserOrder userOrderCoffee, UserOrder userOrderOrange) {

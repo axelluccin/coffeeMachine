@@ -11,8 +11,8 @@ public class ProtocolDrinkMaker {
     private static final String EMPTY_DRINK_END = " in coffee machine. A Email was sent to reload the coffee machine";
     private static final String EMPTY_DRINK_START = "There is no ";
 
-    public String formatToDrinkMaker(UserOrder userOrder) {
-        return userOrder.getDrinkProtocol() + userOrder.drinkHot() + SEPARATION + userOrder.getSugar() + SEPARATION + userOrder.getStick();
+    public String formatToDrinkMaker(UserOrderEntity userOrderEntity) {
+        return userOrderEntity.getDrinkProtocol() + userOrderEntity.drinkHot() + SEPARATION + userOrderEntity.getSugar() + SEPARATION + userOrderEntity.getStick();
     }
 
     public String formatMissingMoney(BigDecimal missingMoney, String drinkName) {

@@ -22,24 +22,25 @@ public class CoffeeMachine {
         this.beverageQuantityChecker = beverageQuantityChecker;
     }
 
-    public void order(UserOrder userOrder) {
-        BigDecimal priceCompare = userOrder.priceCompare();
+    public void order(Order order) {
+        UserOrderEntity userOrderEntity = new UserOrderEntity(order);
+        BigDecimal priceCompare = userOrderEntity.priceCompare();
         if (moneyIsGreater(priceCompare)) {
-            makeDrinkOrSendEmail(userOrder);
+            makeDrinkOrSendEmail(order, userOrderEntity);
         } else {
-            drinkMaker.send(protocolDrinkMaker.formatMissingMoney(priceCompare, userOrder.getDrink().getDrinkName()));
+            drinkMaker.send(protocolDrinkMaker.formatMissingMoney(priceCompare, order.getDrinkType().getDrinkName()));
         }
     }
 
-    private void makeDrinkOrSendEmail(UserOrder userOrder) {
-        String drinkName = userOrder.getDrink().getDrinkName();
+    private void makeDrinkOrSendEmail(Order order, UserOrderEntity userOrderEntity) {
+        String drinkName = order.getDrinkType().getDrinkName();
 
         if (beverageQuantityChecker.isEmpty(drinkName)) {
             emailNotifier.notifyMissingDrink(drinkName);
             drinkMaker.send(protocolDrinkMaker.formatDrinkEmpty(drinkName));
         } else {
-            reportDrinkMachine.add(userOrder.getDrink());
-            drinkMaker.send(protocolDrinkMaker.formatToDrinkMaker(userOrder));
+            reportDrinkMachine.add(order.getDrinkType());
+            drinkMaker.send(protocolDrinkMaker.formatToDrinkMaker(userOrderEntity));
         }
     }
 

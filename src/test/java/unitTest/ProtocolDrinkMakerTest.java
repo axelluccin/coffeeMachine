@@ -1,8 +1,9 @@
 package unitTest;
 
 import coffeeMachine.DrinkType;
+import coffeeMachine.Order;
 import coffeeMachine.ProtocolDrinkMaker;
-import coffeeMachine.UserOrder;
+import coffeeMachine.UserOrderEntity;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,9 +22,10 @@ public class ProtocolDrinkMakerTest {
 
     @Test
     public void when_user_order_a_tea_with_a_sugar_protocol_drink_maker_should_return_the_string_protocol() {
-        UserOrder userOrder = new UserOrder(DrinkType.TEA, 1, BigDecimal.ZERO, false);
+        Order order = new Order(DrinkType.TEA, 1, BigDecimal.ZERO, false);
+        UserOrderEntity userOrderEntity = new UserOrderEntity(order);
 
-        String resultProtocol = protocolDrinkMaker.formatToDrinkMaker(userOrder);
+        String resultProtocol = protocolDrinkMaker.formatToDrinkMaker(userOrderEntity);
 
         assertThat(resultProtocol).isEqualTo("T:1:0");
     }
@@ -58,9 +60,10 @@ public class ProtocolDrinkMakerTest {
 
     @Test
     public void when_user_order_a_coffee_extra_hot_then_protocol_drink_maker_should_format_the_good_protocol() {
-        UserOrder userOrder = new UserOrder(DrinkType.COFFEE, 0, BigDecimal.ZERO, true);
+        Order order = new Order(DrinkType.COFFEE, 0, BigDecimal.ZERO, true);
+        UserOrderEntity userOrderEntity = new UserOrderEntity(order);
 
-        String resultProtocolDrinkMaker = protocolDrinkMaker.formatToDrinkMaker(userOrder);
+        String resultProtocolDrinkMaker = protocolDrinkMaker.formatToDrinkMaker(userOrderEntity);
 
         assertThat(resultProtocolDrinkMaker).isEqualTo("Ch::");
     }

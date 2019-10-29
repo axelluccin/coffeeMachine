@@ -28,73 +28,72 @@ public class CoffeeMachineAcceptanceTest {
 
     @Test
     public void when_customer_order_a_tea_with_sugar_then_coffee_machine_return_the_good_protocol() {
-        UserOrder userOrder = new UserOrder(DrinkType.TEA, 1, BigDecimal.valueOf(0.40), false);
+        Order userOrderEntity = new Order(DrinkType.TEA, 1, BigDecimal.valueOf(0.40), false);
         when(beverageQuantityChecker.isEmpty(anyString())).thenReturn(false);
 
-        coffeeMachine.order(userOrder);
+        coffeeMachine.order(userOrderEntity);
 
         verify(drinkMaker).send("T:1:0");
     }
 
     @Test
     public void when_customer_order_a_chocolate_with_no_sugar_then_the_coffee_machine_send_good_protocol() {
-        UserOrder userOrder = new UserOrder(DrinkType.CHOCOLATE, 0, BigDecimal.valueOf(0.50), false);
+        Order userOrderEntity = new Order(DrinkType.CHOCOLATE, 0, BigDecimal.valueOf(0.50), false);
         when(beverageQuantityChecker.isEmpty(anyString())).thenReturn(false);
 
-        coffeeMachine.order(userOrder);
+        coffeeMachine.order(userOrderEntity);
 
         verify(drinkMaker).send("H::");
     }
 
     @Test
     public void when_customer_order_a_coffee_with_2_sugar_then_the_coffee_machine_send_good_protocol() {
-        UserOrder userOrder = new UserOrder(DrinkType.COFFEE, 2, BigDecimal.valueOf(0.60), false);
+        Order order = new Order(DrinkType.COFFEE, 2, BigDecimal.valueOf(0.60), false);
         when(beverageQuantityChecker.isEmpty(anyString())).thenReturn(false);
 
-        coffeeMachine.order(userOrder);
+        coffeeMachine.order(order);
 
         verify(drinkMaker).send("C:2:0");
     }
 
     @Test
     public void when_user_order_a_tea_and_give_30_cents_then_the_coffee_machine_should_send_the_message_protocol_to_the_drink_maker() {
-        UserOrder userOrder = new UserOrder(DrinkType.TEA, 0, BigDecimal.valueOf(0.3), false);
+        Order order = new Order(DrinkType.TEA, 0, BigDecimal.valueOf(0.3), false);
 
-        coffeeMachine.order(userOrder);
+        coffeeMachine.order(order);
 
         verify(drinkMaker).send("M:It is missing 0.1 dollars to buy a tea");
     }
 
     @Test
     public void when_user_order_a_orange_juice_and_give_60_cents_then_coffee_machine_should_send_the_message_protocol_to_the_drink_maker() {
-        UserOrder userOrder = new UserOrder(DrinkType.ORANGE, 0, BigDecimal.valueOf(0.60), false);
+        Order order = new Order(DrinkType.ORANGE, 0, BigDecimal.valueOf(0.60), false);
         when(beverageQuantityChecker.isEmpty(anyString())).thenReturn(false);
 
-        coffeeMachine.order(userOrder);
+        coffeeMachine.order(order);
 
         verify(drinkMaker).send("O::");
     }
 
     @Test
     public void when_user_order_a_coffee_extra_hot_then_coffee_machine_should_send_the_message_protocol_to_the_drink_maker() {
-        UserOrder userOrder = new UserOrder(DrinkType.COFFEE, 0, BigDecimal.valueOf(0.60), true);
+        Order order = new Order(DrinkType.COFFEE, 0, BigDecimal.valueOf(0.60), true);
         when(beverageQuantityChecker.isEmpty(anyString())).thenReturn(false);
 
-        coffeeMachine.order(userOrder);
+        coffeeMachine.order(order);
 
         verify(drinkMaker).send("Ch::");
     }
 
-
     @Test
     public void when_users_make_some_orders_then_coffee_machine_should_return_the_report_of_orders() {
-        UserOrder userOrderTea = new UserOrder(DrinkType.TEA, 0, DrinkType.TEA.getCost(), false);
-        UserOrder userOrderChocolate = new UserOrder(DrinkType.CHOCOLATE, 0, DrinkType.CHOCOLATE.getCost(), false);
-        UserOrder userOrderCoffee = new UserOrder(DrinkType.COFFEE, 0, DrinkType.COFFEE.getCost(), false);
-        UserOrder userOrderOrange = new UserOrder(DrinkType.ORANGE, 0, DrinkType.ORANGE.getCost(), false);
+        Order orderTea = new Order(DrinkType.TEA, 0, DrinkType.TEA.getCost(), false);
+        Order orderChocolate = new Order(DrinkType.CHOCOLATE, 0, DrinkType.CHOCOLATE.getCost(), false);
+        Order orderCoffee = new Order(DrinkType.COFFEE, 0, DrinkType.COFFEE.getCost(), false);
+        Order orderOrange = new Order(DrinkType.ORANGE, 0, DrinkType.ORANGE.getCost(), false);
 
         when(beverageQuantityChecker.isEmpty(anyString())).thenReturn(false);
-        allCommand(userOrderTea, userOrderChocolate, userOrderCoffee, userOrderOrange);
+        allCommand(orderTea, orderChocolate, orderCoffee, orderOrange);
 
         coffeeMachine.report();
 
@@ -103,35 +102,35 @@ public class CoffeeMachineAcceptanceTest {
 
     @Test
     public void when_user_order_a_drink_and_drink_machine_got_no_drink_then_coffee_machine_should_send_email_and_notify_user_shortage() {
-        UserOrder userOrder = new UserOrder(DrinkType.TEA, 0, DrinkType.TEA.getCost(), false);
+        Order order = new Order(DrinkType.TEA, 0, DrinkType.TEA.getCost(), false);
         when(beverageQuantityChecker.isEmpty(anyString())).thenReturn(true);
 
-        coffeeMachine.order(userOrder);
+        coffeeMachine.order(order);
 
         verify(emailNotifier).notifyMissingDrink("tea");
         verify(drinkMaker).send("M:There is no tea in coffee machine. A Email was sent to reload the coffee machine");
     }
 
-    private void allCommand(UserOrder userOrderTea, UserOrder userOrderChocolate, UserOrder userOrderCoffee, UserOrder userOrderOrange) {
+    private void allCommand(Order orderTea, Order orderChocolate, Order orderCoffee, Order orderOrange) {
         // TEA
-        coffeeMachine.order(userOrderTea);
-        coffeeMachine.order(userOrderTea);
+        coffeeMachine.order(orderTea);
+        coffeeMachine.order(orderTea);
 
         // CHOCOLATE
-        coffeeMachine.order(userOrderChocolate);
-        coffeeMachine.order(userOrderChocolate);
-        coffeeMachine.order(userOrderChocolate);
+        coffeeMachine.order(orderChocolate);
+        coffeeMachine.order(orderChocolate);
+        coffeeMachine.order(orderChocolate);
 
         // COFFEE
-        coffeeMachine.order(userOrderCoffee);
+        coffeeMachine.order(orderCoffee);
 
         // ORANGE
-        coffeeMachine.order(userOrderOrange);
-        coffeeMachine.order(userOrderOrange);
-        coffeeMachine.order(userOrderOrange);
-        coffeeMachine.order(userOrderOrange);
-        coffeeMachine.order(userOrderOrange);
-        coffeeMachine.order(userOrderOrange);
-        coffeeMachine.order(userOrderOrange);
+        coffeeMachine.order(orderOrange);
+        coffeeMachine.order(orderOrange);
+        coffeeMachine.order(orderOrange);
+        coffeeMachine.order(orderOrange);
+        coffeeMachine.order(orderOrange);
+        coffeeMachine.order(orderOrange);
+        coffeeMachine.order(orderOrange);
     }
 }

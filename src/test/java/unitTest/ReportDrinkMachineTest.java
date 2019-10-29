@@ -2,11 +2,9 @@ package unitTest;
 
 import coffeeMachine.DrinkType;
 import coffeeMachine.ReportDrinkMachine;
-import coffeeMachine.UserOrder;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,31 +19,40 @@ public class ReportDrinkMachineTest {
 
     @Test
     public void when_no_order_in_coffee_machine() {
-        List<UserOrder> resultOrders = reportDrinkMachine.Orders();
+        List<DrinkType> resultOrders = reportDrinkMachine.Orders();
 
         assertThat(resultOrders.size()).isEqualTo(0);
     }
 
     @Test
     public void when_one_orders_in_coffee_machine_then_report_return_1_order() {
-        UserOrder order = new UserOrder(DrinkType.COFFEE, 0, BigDecimal.ZERO, false);
-        reportDrinkMachine.add(order);
+        reportDrinkMachine.add(DrinkType.COFFEE);
 
-        List<UserOrder> resultOrders = reportDrinkMachine.Orders();
+        List<DrinkType> resultOrders = reportDrinkMachine.Orders();
 
         assertThat(resultOrders.size()).isEqualTo(1);
     }
 
     @Test
     public void when_2_orders_of_coffee_and_1_order_of_chocolate_then_report_return_2_orders() {
-        UserOrder orderCoffee = new UserOrder(DrinkType.COFFEE, 0, BigDecimal.ZERO, false);
-        UserOrder orderChocolate = new UserOrder(DrinkType.CHOCOLATE, 0, BigDecimal.ZERO, false);
-
-        reportDrinkMachine.add(orderChocolate);
-        reportDrinkMachine.add(orderCoffee);
-        reportDrinkMachine.add(orderCoffee);
+        reportDrinkMachine.add(DrinkType.CHOCOLATE);
+        reportDrinkMachine.add(DrinkType.COFFEE);
+        reportDrinkMachine.add(DrinkType.COFFEE);
 
         int resultOrdersCoffee = reportDrinkMachine.OrdersOfType(DrinkType.COFFEE);
+
         assertThat(resultOrdersCoffee).isEqualTo(2);
+    }
+
+    @Test
+    public void when_2_orders_of_coffee_and_2_orders_of_chocolate_then_report_return_the_message() {
+        reportDrinkMachine.add(DrinkType.COFFEE);
+        reportDrinkMachine.add(DrinkType.COFFEE);
+        reportDrinkMachine.add(DrinkType.CHOCOLATE);
+        reportDrinkMachine.add(DrinkType.CHOCOLATE);
+
+        String resultReportOrders = reportDrinkMachine.reportMessage();
+
+        assertThat(resultReportOrders).isEqualTo("0 tea, 2 chocolate, 2 coffee and 0 orange. Money earned: 2.2 dollars");
     }
 }

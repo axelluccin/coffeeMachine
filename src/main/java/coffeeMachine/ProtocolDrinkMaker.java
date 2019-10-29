@@ -22,6 +22,6 @@ public class ProtocolDrinkMaker {
     }
 
     public String formatDrinkEmpty(String drinkName) {
-        return formatMessage(drinkName + "is empty on coffee machine. Please reloading the machine");
+        return formatMessage("There is no tea in coffee machine. A Email was sent to reload the coffee machine");
     }
 }

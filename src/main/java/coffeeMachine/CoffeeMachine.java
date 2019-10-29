@@ -35,11 +35,11 @@ public class CoffeeMachine {
         String drinkName = userOrder.getDrink().getDrinkName();
 
         if (beverageQuantityChecker.isEmpty(drinkName)) {
+            emailNotifier.notifyMissingDrink("There is no tea in coffee machine. Please, reloading the machine");
+            drinkMaker.send(protocolDrinkMaker.formatDrinkEmpty(drinkName));
+        } else {
             reportDrinkMachine.add(userOrder.getDrink());
             drinkMaker.send(protocolDrinkMaker.formatToDrinkMaker(userOrder));
-        } else {
-            emailNotifier.notifyMissingDrink(drinkName);
-            drinkMaker.send(protocolDrinkMaker.formatDrinkEmpty(drinkName));
         }
     }
 

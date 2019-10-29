@@ -13,15 +13,13 @@ import static org.mockito.Mockito.verify;
 public class CoffeeMachineAcceptanceTest {
 
     private DrinkMaker drinkMaker;
-    private ProtocolDrinkMaker protocolDrinkMaker;
     private CoffeeMachine coffeeMachine;
-    private ReportDrinkMachine reportDrinkMachine;
 
     @Before
     public void setUp() throws Exception {
         drinkMaker = mock(DrinkMaker.class);
-        protocolDrinkMaker = new ProtocolDrinkMaker();
-        reportDrinkMachine = new ReportDrinkMachine();
+        ProtocolDrinkMaker protocolDrinkMaker = new ProtocolDrinkMaker();
+        ReportDrinkMachine reportDrinkMachine = new ReportDrinkMachine();
         coffeeMachine = new CoffeeMachine(drinkMaker, protocolDrinkMaker, reportDrinkMachine);
     }
 
@@ -101,15 +99,19 @@ public class CoffeeMachineAcceptanceTest {
     }
 
     private void allCommand(UserOrder userOrderTea, UserOrder userOrderChocolate, UserOrder userOrderCoffee, UserOrder userOrderOrange) {
+        // TEA
         coffeeMachine.order(userOrderTea);
         coffeeMachine.order(userOrderTea);
 
+        // CHOCOLATE
         coffeeMachine.order(userOrderChocolate);
         coffeeMachine.order(userOrderChocolate);
         coffeeMachine.order(userOrderChocolate);
 
+        // COFFEE
         coffeeMachine.order(userOrderCoffee);
 
+        // ORANGE
         coffeeMachine.order(userOrderOrange);
         coffeeMachine.order(userOrderOrange);
         coffeeMachine.order(userOrderOrange);

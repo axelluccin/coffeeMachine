@@ -8,13 +8,11 @@ public class ProtocolDrinkMaker {
     private static final String MESSAGE = "M:";
     private static final String IT_IS_MISSING = "It is missing ";
     private static final String DOLLARS_TO_BUY_A = " dollars to buy a ";
+    private static final String EMPTY_DRINK_END = " in coffee machine. A Email was sent to reload the coffee machine";
+    private static final String EMPTY_DRINK_START = "There is no ";
 
     public String formatToDrinkMaker(UserOrder userOrder) {
         return userOrder.getDrinkProtocol() + userOrder.drinkHot() + SEPARATION + userOrder.getSugar() + SEPARATION + userOrder.getStick();
-    }
-
-    private String formatMessage(String message) {
-        return MESSAGE + message;
     }
 
     public String formatMissingMoney(BigDecimal missingMoney, String drinkName) {
@@ -22,6 +20,10 @@ public class ProtocolDrinkMaker {
     }
 
     public String formatDrinkEmpty(String drinkName) {
-        return formatMessage("There is no tea in coffee machine. A Email was sent to reload the coffee machine");
+        return formatMessage(EMPTY_DRINK_START + drinkName + EMPTY_DRINK_END);
+    }
+
+    private String formatMessage(String message) {
+        return MESSAGE + message;
     }
 }

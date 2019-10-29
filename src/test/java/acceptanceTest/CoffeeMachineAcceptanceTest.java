@@ -6,25 +6,30 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class CoffeeMachineAcceptanceTest {
 
     private DrinkMaker drinkMaker;
     private CoffeeMachine coffeeMachine;
+    private BeverageQuantityChecker beverageQuantityChecker;
+    private EmailNotifier emailNotifier;
 
     @Before
     public void setUp() throws Exception {
         drinkMaker = mock(DrinkMaker.class);
+        emailNotifier = mock(EmailNotifier.class);
+        beverageQuantityChecker = mock(BeverageQuantityChecker.class);
+
         ProtocolDrinkMaker protocolDrinkMaker = new ProtocolDrinkMaker();
         ReportDrinkMachine reportDrinkMachine = new ReportDrinkMachine();
-        coffeeMachine = new CoffeeMachine(drinkMaker, protocolDrinkMaker, reportDrinkMachine);
+        coffeeMachine = new CoffeeMachine(drinkMaker, protocolDrinkMaker, reportDrinkMachine, emailNotifier, beverageQuantityChecker);
     }
 
     @Test
     public void when_customer_order_a_tea_with_sugar_then_coffee_machine_return_the_good_protocol() {
         UserOrder userOrder = new UserOrder(DrinkType.TEA, 1, BigDecimal.valueOf(0.40), false);
+        when(beverageQuantityChecker.isEmpty(anyString())).thenReturn(true);
 
         coffeeMachine.order(userOrder);
 
@@ -34,6 +39,7 @@ public class CoffeeMachineAcceptanceTest {
     @Test
     public void when_customer_order_a_chocolate_with_no_sugar_then_the_coffee_machine_send_good_protocol() {
         UserOrder userOrder = new UserOrder(DrinkType.CHOCOLATE, 0, BigDecimal.valueOf(0.50), false);
+        when(beverageQuantityChecker.isEmpty(anyString())).thenReturn(true);
 
         coffeeMachine.order(userOrder);
 
@@ -43,17 +49,11 @@ public class CoffeeMachineAcceptanceTest {
     @Test
     public void when_customer_order_a_coffee_with_2_sugar_then_the_coffee_machine_send_good_protocol() {
         UserOrder userOrder = new UserOrder(DrinkType.COFFEE, 2, BigDecimal.valueOf(0.60), false);
+        when(beverageQuantityChecker.isEmpty(anyString())).thenReturn(true);
 
         coffeeMachine.order(userOrder);
 
         verify(drinkMaker).send("C:2:0");
-    }
-
-    @Test
-    public void display_a_message_then_coffee_machine_send_good_protocol() {
-        coffeeMachine.displayMessage("un message");
-
-        verify(drinkMaker).send("M:un message");
     }
 
     @Test
@@ -68,6 +68,7 @@ public class CoffeeMachineAcceptanceTest {
     @Test
     public void when_user_order_a_orange_juice_and_give_60_cents_then_coffee_machine_should_send_the_message_protocol_to_the_drink_maker() {
         UserOrder userOrder = new UserOrder(DrinkType.ORANGE, 0, BigDecimal.valueOf(0.60), false);
+        when(beverageQuantityChecker.isEmpty(anyString())).thenReturn(true);
 
         coffeeMachine.order(userOrder);
 
@@ -77,6 +78,7 @@ public class CoffeeMachineAcceptanceTest {
     @Test
     public void when_user_order_a_coffee_extra_hot_then_coffee_machine_should_send_the_message_protocol_to_the_drink_maker() {
         UserOrder userOrder = new UserOrder(DrinkType.COFFEE, 0, BigDecimal.valueOf(0.60), true);
+        when(beverageQuantityChecker.isEmpty(anyString())).thenReturn(true);
 
         coffeeMachine.order(userOrder);
 
@@ -91,10 +93,23 @@ public class CoffeeMachineAcceptanceTest {
         UserOrder userOrderCoffee = new UserOrder(DrinkType.COFFEE, 0, DrinkType.COFFEE.getCost(), false);
         UserOrder userOrderOrange = new UserOrder(DrinkType.ORANGE, 0, DrinkType.ORANGE.getCost(), false);
 
+        when(beverageQuantityChecker.isEmpty(anyString())).thenReturn(true);
         allCommand(userOrderTea, userOrderChocolate, userOrderCoffee, userOrderOrange);
 
         coffeeMachine.report();
+
         verify(drinkMaker).printReport("2 tea, 3 chocolate, 1 coffee and 7 orange. Money earned: 7.1 dollars");
+    }
+
+    @Test
+    public void when_user_order_a_drink_and_drink_machine_got_no_drink_then_coffee_machine_should_send_email_and_notify_user_shortage() {
+        UserOrder userOrder = new UserOrder(DrinkType.TEA, 0, DrinkType.TEA.getCost(), false);
+        when(beverageQuantityChecker.isEmpty(DrinkType.TEA.getDrinkName())).thenReturn(true);
+
+        coffeeMachine.order(userOrder);
+
+        verify(emailNotifier).notifyMissingDrink("Tea is empty on coffee machine. Please reloading the machine");
+        verify(drinkMaker).send("M:There is no tea in coffee machine. A Email was sent to reload the coffee machine");
     }
 
     private void allCommand(UserOrder userOrderTea, UserOrder userOrderChocolate, UserOrder userOrderCoffee, UserOrder userOrderOrange) {

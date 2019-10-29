@@ -6,18 +6,22 @@ public class ProtocolDrinkMaker {
 
     private static final String SEPARATION = ":";
     private static final String MESSAGE = "M:";
-    private static final String IT_IS_MISSING = "M:It is missing ";
+    private static final String IT_IS_MISSING = "It is missing ";
     private static final String DOLLARS_TO_BUY_A = " dollars to buy a ";
 
-    public String format(UserOrder userOrder) {
+    public String formatToDrinkMaker(UserOrder userOrder) {
         return userOrder.getDrinkProtocol() + userOrder.drinkHot() + SEPARATION + userOrder.getSugar() + SEPARATION + userOrder.getStick();
     }
 
-    public String format(String message) {
+    private String formatMessage(String message) {
         return MESSAGE + message;
     }
 
-    public String format(BigDecimal missingMoney, DrinkType drinkType) {
-        return IT_IS_MISSING + missingMoney + DOLLARS_TO_BUY_A + drinkType.getDrink();
+    public String formatMissingMoney(BigDecimal missingMoney, String drinkName) {
+        return formatMessage(IT_IS_MISSING + missingMoney + DOLLARS_TO_BUY_A + drinkName);
+    }
+
+    public String formatDrinkEmpty(String drinkName) {
+        return formatMessage(drinkName + "is empty on coffee machine. Please reloading the machine");
     }
 }

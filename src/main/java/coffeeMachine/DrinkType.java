@@ -26,7 +26,7 @@ public enum DrinkType {
         this.drink = drink;
     }
 
-    public String getDrink() {
+    public String getDrinkName() {
         return drink;
     }
 }

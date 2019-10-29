@@ -15,12 +15,14 @@ public class CoffeeMachineAcceptanceTest {
     private DrinkMaker drinkMaker;
     private ProtocolDrinkMaker protocolDrinkMaker;
     private CoffeeMachine coffeeMachine;
+    private ReportDrinkMachine reportDrinkMachine;
 
     @Before
     public void setUp() throws Exception {
         drinkMaker = mock(DrinkMaker.class);
         protocolDrinkMaker = new ProtocolDrinkMaker();
-        coffeeMachine = new CoffeeMachine(drinkMaker, protocolDrinkMaker);
+        reportDrinkMachine = new ReportDrinkMachine();
+        coffeeMachine = new CoffeeMachine(drinkMaker, protocolDrinkMaker, reportDrinkMachine);
     }
 
     @Test
@@ -87,10 +89,10 @@ public class CoffeeMachineAcceptanceTest {
 
     @Test
     public void when_users_make_some_orders_then_coffee_machine_should_return_the_report_of_orders() {
-        UserOrder userOrderTea = new UserOrder(DrinkType.COFFEE, 0, BigDecimal.valueOf(0.40), false);
-        UserOrder userOrderChocolate = new UserOrder(DrinkType.CHOCOLATE, 0, BigDecimal.valueOf(0.50), false);
-        UserOrder userOrderCoffee = new UserOrder(DrinkType.COFFEE, 0, BigDecimal.valueOf(0.60), false);
-        UserOrder userOrderOrange = new UserOrder(DrinkType.ORANGE, 0, BigDecimal.valueOf(0.60), false);
+        UserOrder userOrderTea = new UserOrder(DrinkType.TEA, 0, DrinkType.TEA.getCost(), false);
+        UserOrder userOrderChocolate = new UserOrder(DrinkType.CHOCOLATE, 0, DrinkType.CHOCOLATE.getCost(), false);
+        UserOrder userOrderCoffee = new UserOrder(DrinkType.COFFEE, 0, DrinkType.COFFEE.getCost(), false);
+        UserOrder userOrderOrange = new UserOrder(DrinkType.ORANGE, 0, DrinkType.ORANGE.getCost(), false);
 
         allCommand(userOrderTea, userOrderChocolate, userOrderCoffee, userOrderOrange);
 
